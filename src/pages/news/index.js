@@ -1,4 +1,5 @@
 import Layout from "@/components/layout";
+import FooterC from "@/components/layout/footerC";
 import { Loading } from "@nextui-org/react";
 import styles from "../../styles/Home.module.css";
 export default function News() {
@@ -19,9 +20,12 @@ export default function News() {
 
   // if (isLoading) {
   return (
-    <Layout className={styles.main}>
-      <Loading color={"white"} />
-    </Layout>
+    <>
+      <Layout className={styles.main}>
+        <Loading color={"white"} />
+        <FooterC />
+      </Layout>
+    </>
   );
   // } else {
   //   const post = snapshot.current;

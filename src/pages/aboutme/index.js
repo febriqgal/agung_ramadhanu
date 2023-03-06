@@ -8,6 +8,7 @@ import tw from "../../../public/tw.svg";
 import wa from "../../../public/wa.svg";
 import yt from "../../../public/yt.svg";
 import Link from "next/link";
+import FooterC from "@/components/layout/footerC";
 export default function Contact() {
   return (
     <Layout title={"About Me -"}>
@@ -45,6 +46,7 @@ export default function Contact() {
           <Image src={yt} alt={"#"} />
         </Link>
       </div>
+      <FooterC />
     </Layout>
   );
 }

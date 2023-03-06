@@ -125,7 +125,6 @@ export default function Layout({ children, title }) {
           </div>
         </nav>
         <main className={styles.main}>{children}</main>
-        <footer className="text-center py-2">© 2023</footer>
       </div>
     </>
   );
