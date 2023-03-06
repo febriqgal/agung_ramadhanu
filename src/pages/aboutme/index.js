@@ -15,10 +15,10 @@ export default function Contact() {
       <div className="h-24 w-24 rounded-full overflow-clip hover:scale-110 duration-500 transition-all">
         <Image className="scale-110 translate-x-1" src={Profile} alt={"#"} />
       </div>
-      <h1 className="mt-2 font-bold text-lg">
+      <h1 className="mt-2 font-bold text-center">
         Agung Ramadhanu, S.Kom., M.Kom,. MTA
       </h1>
-      <div className="flex gap-4">
+      <div className="flex gap-4 mt-4">
         <Link
           target={"_blank"}
           href={"https://www.instagram.com/agungramadhanu_/"}
