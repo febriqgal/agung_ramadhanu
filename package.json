@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@nextui-org/react": "^1.0.0-beta.12",
+    "dayjs": "^1.11.7",
     "eslint": "8.35.0",
     "eslint-config-next": "13.2.3",
     "firebase": "^9.17.2",
@@ -17,6 +18,8 @@
     "next": "13.2.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-hook-form": "^7.43.5",
+    "react-hot-toast": "^2.4.0",
     "sharp": "^0.31.3",
     "typeit-react": "^2.6.4"
   },

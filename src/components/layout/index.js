@@ -19,6 +19,7 @@ export default function Layout({ children, title }) {
     { title: "Project", href: "/project", icon: Project },
     { title: "Team", href: "/team", icon: Team },
     { title: "About Me", href: "/aboutme", icon: Contact },
+    { title: "Login", href: "/login", icon: Contact },
   ];
   const [clientWindowHeight, setClientWindowHeight] = useState("");
   const [backgroundTransparacy, setBackgroundTransparacy] = useState(0);
