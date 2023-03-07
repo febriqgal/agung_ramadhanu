@@ -14,7 +14,7 @@ export default function Login() {
     const push = async () => {
       await signInWithEmailAndPassword(auth, data.email, data.password);
       setTimeout(() => {
-        route.replace("/");
+        route.replace("/dashboard-admin");
       }, 2000);
     };
     toast.promise(push(), {

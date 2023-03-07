@@ -13,7 +13,7 @@ const LayoutAdmin = ({ children }) => {
     {
       name: "Tambah Berita",
       icon: home,
-      href: "/dashboard-admin/tambah-berita",
+      href: "/dashboard-admin/tambah-informasi",
     },
     // { name: "Tambah Download", icon: tambahberita, href: "/dashboard-admin/download" },
     {

@@ -21,7 +21,8 @@
     "react-hook-form": "^7.43.5",
     "react-hot-toast": "^2.4.0",
     "sharp": "^0.31.3",
-    "typeit-react": "^2.6.4"
+    "typeit-react": "^2.6.4",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.13",
