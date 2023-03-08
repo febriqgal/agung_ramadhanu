@@ -2,38 +2,34 @@
 import Layout from "@/components/layout";
 import { useUser } from "@/context/user";
 import { db } from "@/server/firebase";
-import { Button, Loading, Modal, Tooltip } from "@nextui-org/react";
+import { uuidv4 } from "@firebase/util";
+import { Loading, Modal, Table, Tooltip } from "@nextui-org/react";
 import dayjs from "dayjs";
 import "dayjs/locale/id";
 import relativeTime from "dayjs/plugin/relativeTime";
+import { getAuth } from "firebase/auth";
 import {
-  setDoc,
-  addDoc,
   collection,
   deleteDoc,
   doc,
   getDoc,
+  getDocs,
   orderBy,
+  query,
 } from "firebase/firestore";
-import { Table, Header } from "@nextui-org/react";
-import app from "@/server/firebase";
-import { uuidv4 } from "@firebase/util";
-import { getAuth } from "firebase/auth";
-import { getDocs, query } from "firebase/firestore";
-import { deleteObject, getStorage, ref } from "firebase/storage";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
-import { toast, Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 import dibuat from "../../../../public/dibuat.svg";
 import dilihat from "../../../../public/dilihat.svg";
+import Docc from "../../../../public/doc.svg";
 import edit from "../../../../public/edit.svg";
 import hapus from "../../../../public/hapus.svg";
+import Modul from "../../../../public/modul.svg";
 import penulis from "../../../../public/penulis.svg";
 import styles from "../../../styles/Home.module.css";
-import Modul from "../../../../public/modul.svg";
-import Docc from "../../../../public/doc.svg";
 
 export default function Index() {
   const random = uuidv4();
@@ -242,16 +238,14 @@ export default function Index() {
           >
             Kirim Tugas
           </button>
-          <div className="w-full text-white px-5">
+          <div className="w-full text-white ">
             <Table
-              className="w-full"
               bordered
-              shadow={false}
+              shadow={true}
               color="secondary"
               aria-label="Example pagination  table"
               css={{
-                width: "fit-content",
-                height: "fit-content",
+                height: "auto",
                 minWidth: "100%",
               }}
               selectionMode="none"
@@ -268,12 +262,16 @@ export default function Index() {
                 {dataTugas.map((e, i) => {
                   const dataa = e.data();
                   return (
-                    <Table.Row css={{ color: "White" }} key={i}>
+                    <Table.Row
+                      className="hover:bg-red-300"
+                      css={{ color: "White", width: "fit-content" }}
+                      key={i}
+                    >
                       <Table.Cell>{i + 1}.</Table.Cell>
                       <Table.Cell>{dataa.namatugas}</Table.Cell>
                       <Table.Cell>{dataa.nama}</Table.Cell>
                       <Table.Cell>{dataa.tanggal}</Table.Cell>
-                      <Table.Cell>
+                      <Table.Cell css={{ width: "fit-content" }}>
                         {user.currentUser.email === "febriqgal@gmail.com" ? (
                           <Link target={"_blank"} href={dataa.link}>
                             Link

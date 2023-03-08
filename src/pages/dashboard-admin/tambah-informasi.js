@@ -24,7 +24,7 @@ export default function TambahInformasi() {
     const push = async () => {
       //   if (imageUpload == null) return;
       //   await uploadBytes(storageRef, imageUpload);
-      await addDoc(collection(db, "news"), {
+      await addDoc(collection(db, "informasi"), {
         judul: data.judul,
         isi: data.isi,
         dilihat: 0,

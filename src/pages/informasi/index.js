@@ -2,7 +2,7 @@
 import Layout from "@/components/layout";
 import FooterC from "@/components/layout/footerC";
 import { Loading } from "@nextui-org/react";
-import { query, collection, getDocs } from "firebase/firestore";
+import { query, collection, getDocs, doc, updateDoc } from "firebase/firestore";
 import styles from "../../styles/Home.module.css";
 import { db } from "@/server/firebase";
 import { useRef, useState, useEffect } from "react";
@@ -12,7 +12,7 @@ export default function News() {
   const snapshot = useRef(null);
   const [isLoading, setIsloading] = useState(true);
   const getDBFromFirestore = async () => {
-    const querySnapshot = query(collection(db, "news"));
+    const querySnapshot = query(collection(db, "informasi"));
     const gettt = await getDocs(querySnapshot);
     snapshot.current = gettt.docs;
     setTimeout(() => {
@@ -45,10 +45,14 @@ export default function News() {
               const dataa = e.data();
               return (
                 <div
-                  onClick={() => {
+                  onClick={async () => {
                     route.push(`/informasi/${e.id}`);
+                    const frankDocRef = doc(db, "informasi", `${e.id}`);
+                    await updateDoc(frankDocRef, {
+                      dilihat: dataa.dilihat + 1,
+                    });
                   }}
-                  className="mx-auto hover:scale-110 duration-500 transition-all hover:cursor-pointer w-full rounded-xl shadow-lg border max-w-sm text-white hover:bg-white hover:text-black"
+                  className="mx-auto hover:scale-110 duration-500 transition-all hover:cursor-pointer w-full rounded-xl shadow-2xl border max-w-sm text-white hover:bg-white hover:text-black"
                   key={i}
                 >
                   <img

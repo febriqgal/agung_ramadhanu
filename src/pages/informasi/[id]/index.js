@@ -37,7 +37,7 @@ export default function Index() {
   dayjs.locale("id");
   dayjs.extend(relativeTime);
   const dataBerita = async () => {
-    const docRef = doc(db, "news", `${id}`);
+    const docRef = doc(db, "informasi", `${id}`);
     const docSnap = await getDoc(docRef);
     snapshot.current = docSnap.data();
     setTimeout(() => {
