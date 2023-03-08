@@ -6,7 +6,7 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <Head>
-        <title>BPTD III Sumbar</title>
+        <title>Agung Ramadhanu</title>
         <meta name="description" content="BPTD III Sumbar" />
         <link rel="icon" href="/logo.png" />
       </Head>

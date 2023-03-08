@@ -1,12 +1,13 @@
 import Layout from "@/components/layout";
 import FooterC from "@/components/layout/footerC";
 import React from "react";
-
-export default function Project() {
+import Styles from "../../styles/Home.module.css";
+export default function Modul() {
   return (
     <Layout title={"Project -"}>
-      <h1>Project</h1>
-      <FooterC />
+      <div className={Styles.main}>
+        <h1>Modul</h1>
+      </div>
     </Layout>
   );
 }

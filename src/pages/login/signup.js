@@ -118,7 +118,7 @@ export default function Signup() {
             </form>
           </div>
         </div>
-      </div>{" "}
+      </div>
     </section>
   );
 }

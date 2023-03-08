@@ -1,16 +1,14 @@
 import LayoutAdmin from "@/components/layout-admin";
-import { getAuth } from "firebase/auth";
-import { addDoc, collection } from "firebase/firestore";
+import { db } from "@/server/firebase";
 import dayjs from "dayjs";
 import "dayjs/locale/id";
-import { toast, Toaster } from "react-hot-toast";
-import { useForm } from "react-hook-form";
-import Image from "next/image";
-import React, { useState } from "react";
 import relativeTime from "dayjs/plugin/relativeTime";
+import { getAuth } from "firebase/auth";
+import { addDoc, collection } from "firebase/firestore";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { toast, Toaster } from "react-hot-toast";
 import { v4 as uuidv4 } from "uuid";
-import { db } from "@/server/firebase";
-import homeroute from "../../../public/homeroute.svg";
 export default function TambahInformasi() {
   dayjs.locale("id");
   dayjs.extend(relativeTime);
@@ -41,11 +39,7 @@ export default function TambahInformasi() {
     });
   };
   return (
-    <LayoutAdmin>
-      <div className="flex p-4 place-items-center gap-2">
-        <Image width={20} src={homeroute} alt={"#"} />
-        <h1 className="text-xs">Admin / Tambah Berita</h1>
-      </div>
+    <LayoutAdmin titlee="Tambah Informasi -">
       <Toaster />
       <form
         className="flex flex-col w-full md:w-[500px] m-auto pt-10 px-10"

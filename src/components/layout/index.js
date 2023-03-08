@@ -10,15 +10,14 @@ import Logo from "../../../public/logo.png";
 import Project from "../../../public/project.svg";
 import Team from "../../../public/team.svg";
 import styles from "../../styles/Home.module.css";
+import FooterC from "./footerC";
 export default function Layout({ children, title }) {
   const route = useRouter();
 
   const navigation = [
     { title: "Home", href: "/", icon: Home },
-    { title: "News", href: "/news", icon: Contact },
-    { title: "Project", href: "/project", icon: Project },
-    { title: "Team", href: "/team", icon: Team },
-    { title: "About Me", href: "/aboutme", icon: Contact },
+    { title: "Informasi", href: "/informasi", icon: Contact },
+    { title: "Modul", href: "/modul", icon: Project },
     { title: "Login", href: "/login", icon: Contact },
   ];
   const [clientWindowHeight, setClientWindowHeight] = useState("");
@@ -66,7 +65,7 @@ export default function Layout({ children, title }) {
         />
 
         <nav
-          className="backdrop-blur-sm w-screen hidden lg:fixed lg:block z-50"
+          className="backdrop-blur-sm w-screen hidden fixed lg:block z-50"
           style={{
             padding: `${padding}px 0px`,
             boxShadow: `rgb(0 0 0 / ${boxShadow}) 0px 0px 20px 6px`,
@@ -118,14 +117,15 @@ export default function Layout({ children, title }) {
             {navigation.map((e, i) => (
               <div key={i} className="w-full items-center">
                 <a href={e.href} className="flex flex-col place-items-center">
-                  <Image src={e.icon} alt={"#"}></Image>
+                  <Image src={e.icon} alt={"#"} />
                   <h1 className="text-sm">{e.title}</h1>
                 </a>
               </div>
             ))}
           </div>
         </nav>
-        <main className={styles.main}>{children}</main>
+        <main>{children}</main>
+        <FooterC />
       </div>
     </>
   );
