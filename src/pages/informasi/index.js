@@ -54,7 +54,7 @@ export default function News() {
                   <img
                     className="rounded-t-xl"
                     alt="#"
-                    src="https://picsum.photos/id/237/300/200 "
+                    src={`https://picsum.photos/700/500/?blur=2`}
                   />
                   <div className="p-7">
                     <h1 className={`${styles.truncate2} font-bold`}>

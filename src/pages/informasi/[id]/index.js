@@ -176,7 +176,7 @@ export default function Index() {
                       <div className="aspect-w-12 aspect-h-7 lg:aspect-none">
                         <img
                           className="rounded-lg shadow-lg object-cover object-center hover:scale-105 duration-1000"
-                          src={`https://images.unsplash.com/photo-1610563166150-b34df4f3bcd6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=776&q=80`}
+                          src={`https://picsum.photos/700/500/?blur=2`}
                           alt={post.isi}
                           width={1184}
                           height={1376}
