@@ -13,7 +13,7 @@ import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast, Toaster } from "react-hot-toast";
-import { db, FirebaseApp } from "@/server/firebase";
+import { db } from "@/server/firebase";
 import styles from "../../styles/Home.module.css";
 
 export default function Signup() {

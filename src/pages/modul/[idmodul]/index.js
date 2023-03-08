@@ -2,11 +2,12 @@
 import Layout from "@/components/layout";
 import { useUser } from "@/context/user";
 import { db } from "@/server/firebase";
-import { Loading, Modal, Tooltip } from "@nextui-org/react";
+import { Button, Loading, Modal, Tooltip } from "@nextui-org/react";
 import dayjs from "dayjs";
 import "dayjs/locale/id";
 import relativeTime from "dayjs/plugin/relativeTime";
 import {
+  setDoc,
   addDoc,
   collection,
   deleteDoc,
@@ -31,6 +32,9 @@ import edit from "../../../../public/edit.svg";
 import hapus from "../../../../public/hapus.svg";
 import penulis from "../../../../public/penulis.svg";
 import styles from "../../../styles/Home.module.css";
+import Modul from "../../../../public/modul.svg";
+import Docc from "../../../../public/doc.svg";
+
 export default function Index() {
   const random = uuidv4();
   const user = getAuth();
@@ -60,7 +64,7 @@ export default function Index() {
   //------------------------------------------------------
   const getTugas = async () => {
     const querySnapshot = query(
-      collection(db, "tugas"),
+      collection(db, idmodul),
       orderBy("urutan", "desc")
     );
     const gettt = await getDocs(querySnapshot);
@@ -94,7 +98,7 @@ export default function Index() {
             <div className="relative max-w-7xl mx-auto py-5 px-5 sm:px-6 lg:px-8">
               <div className="hidden lg:block absolute top-0 bottom-0 left-3/4 w-screen" />
               <div className="mx-auto text-base max-w-prose lg:grid lg:grid-cols-2 lg:gap-8 lg:max-w-none">
-                <div className="flex bg-white flex-col rounded-lg shadow-xl p-4 lg:flex-row gap-1 lg:gap-0 lg:justify-evenly">
+                <div className="flex bg-white flex-col rounded-lg shadow-2xl p-4 lg:flex-row gap-1 lg:gap-0 lg:justify-evenly">
                   <div className="flex  items-center gap-2">
                     <Image src={penulis} width={20} alt={"#"} />
                     <h2 className="text-xs">{post.penulis}</h2>
@@ -109,6 +113,18 @@ export default function Index() {
                       <h3 className="uppercase text-xs">
                         {`${dayjs(post.tanggal).fromNow()}`}
                       </h3>
+                    </Tooltip>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Image src={Docc} width={20} alt={"#"} />
+                    <Tooltip content={post.tanggal_berita}>
+                      <Link
+                        target={"_blank"}
+                        href={"https://drive.google.com/"}
+                        className="uppercase text-xs"
+                      >
+                        Download
+                      </Link>
                     </Tooltip>
                   </div>
                   {email === "febriqgal@gmail.com" ? (
@@ -145,13 +161,7 @@ export default function Index() {
                     <button
                       className="bg-red-500 py-1 px-4 rounded-lg text-white"
                       onClick={async () => {
-                        const docRef = doc(db, "berita", `${id}`);
-                        const storage = getStorage(app);
-                        const desertRef = ref(
-                          storage,
-                          `image/berita/${post.gambar}`
-                        );
-                        await deleteObject(desertRef);
+                        const docRef = doc(db, "informasi", `${id}`);
                         await deleteDoc(docRef);
                         route.push("/");
                         setTimeout(() => {
@@ -202,9 +212,9 @@ export default function Index() {
                   <div className="relative text-base mx-auto max-w-prose lg:max-w-none">
                     <figure>
                       <div className="aspect-w-12 aspect-h-7 lg:aspect-none">
-                        <img
+                        <Image
                           className="rounded-lg shadow-lg object-cover object-center hover:scale-105 duration-1000"
-                          src={`https://picsum.photos/700/500/?blur=2`}
+                          src={Modul}
                           alt={post.isi}
                           width={1184}
                           height={1376}
@@ -226,21 +236,9 @@ export default function Index() {
           </div>
           <button
             onClick={() => {
-              const push = async () => {
-                await addDoc(collection(db, "tugas"), {
-                  nama: user.currentUser.displayName,
-                  tanggal: dayjs().format("ddd, MMM D, YYYY HH:mm"),
-                  urutan: dayjs().format(),
-                  link: "https://www.youtube.com/",
-                });
-              };
-              toast.promise(push(), {
-                loading: "Mohon tunggu...",
-                success: <b>Berhasil menambahkan berita</b>,
-                error: <b>Terjadi kesalahan, silahkan coba lagi.</b>,
-              });
+              route.push(`/modul/${idmodul}/kirim-tugas`);
             }}
-            className="bg-sky-700 text-white rounded-lg px-4 py-2 mt-4 shadow-xl"
+            className="bg-sky-700 text-white rounded-lg px-4 py-2 m-4 shadow-2xl"
           >
             Kirim Tugas
           </button>
@@ -263,6 +261,7 @@ export default function Index() {
                 <Table.Column>Tugas</Table.Column>
                 <Table.Column>Nama</Table.Column>
                 <Table.Column>Tanggal</Table.Column>
+
                 <Table.Column>Link</Table.Column>
               </Table.Header>
               <Table.Body>
@@ -270,12 +269,18 @@ export default function Index() {
                   const dataa = e.data();
                   return (
                     <Table.Row css={{ color: "White" }} key={i}>
-                      <Table.Cell>{i + 1}</Table.Cell>
-                      <Table.Cell>{dataa.nama}</Table.Cell>
+                      <Table.Cell>{i + 1}.</Table.Cell>
+                      <Table.Cell>{dataa.namatugas}</Table.Cell>
                       <Table.Cell>{dataa.nama}</Table.Cell>
                       <Table.Cell>{dataa.tanggal}</Table.Cell>
                       <Table.Cell>
-                        <Link href={dataa.link}>Link</Link>
+                        {user.currentUser.email === "febriqgal@gmail.com" ? (
+                          <Link target={"_blank"} href={dataa.link}>
+                            Link
+                          </Link>
+                        ) : (
+                          <div>-</div>
+                        )}
                       </Table.Cell>
                     </Table.Row>
                   );
