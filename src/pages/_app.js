@@ -7,8 +7,8 @@ export default function App({ Component, pageProps }) {
     <>
       <Head>
         <title>Agung Ramadhanu</title>
-        <meta name="description" content="BPTD III Sumbar" />
-        <link rel="icon" href="/logo.png" />
+        <meta name="description" content="Agung Ramadhanu" />
+        <link rel="icon" href="/logo1.png" />
       </Head>
       <UserProvider>
         <AuthStateChangeProvider>

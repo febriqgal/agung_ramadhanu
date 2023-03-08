@@ -10,12 +10,12 @@ import yt from "../../../public/yt.svg";
 import Styles from "../../styles/Home.module.css";
 export default function FooterC() {
   return (
-    <div className={`bg-white bg-opacity-20 rounded-t-xl`}>
+    <div className={`bg-white bg-opacity-5 shadow-2xl rounded-t-2xl`}>
       <div className="flex flex-col justify-center items-center p-5">
         <div className="h-24 w-24 rounded-full overflow-clip hover:scale-110 duration-500 transition-all">
           <Image className="scale-110 translate-x-1" src={Profile} alt={"#"} />
         </div>
-        <h1 className="font-bold text-center  text-white">
+        <h1 className="font-bold text-center mt-2 text-white">
           Agung Ramadhanu, S.Kom., M.Kom,. MTA
         </h1>
       </div>
@@ -48,7 +48,7 @@ export default function FooterC() {
         </Link>
       </div>
       <div className="w-full flex justify-center items-center">
-        <h1 className="text-center mt-5 px-4 bg-white rounded-t-xl font-medium text-sm">
+        <h1 className="text-center text-gray-500 mt-5 px-4 bg-white rounded-t-lg font-medium text-sm">
           © 2023 - Febriqgal
         </h1>
       </div>

@@ -60,7 +60,7 @@ export default function TambahInformasi() {
           {...register("isi", { required: true })}
         />
         <button
-          className="hover:bg-gray-900 w-full duration-1000 shadow-lg hover:text-white mb-2 py-1 px-3 rounded-lg hover:cursor-pointer"
+          className="hover:bg-white w-full duration-1000 shadow-lg hover:text-sky-700 mb-2 py-1 px-3 rounded-lg hover:cursor-pointer"
           type="submit"
         >
           Kirim

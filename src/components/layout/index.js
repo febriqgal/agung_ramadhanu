@@ -73,7 +73,15 @@ export default function Layout({ children, title }) {
         >
           <div className={`flex justify-between place-items-center px-24`}>
             <div className="flex place-items-center">
-              <Image src={Logo} className="w-[150px] mr-2" alt={"dasdas"} />
+              <Image
+                title="Beranda Agung Ramadhanu"
+                onClick={() => {
+                  route.push("/");
+                }}
+                src={Logo}
+                className="w-[150px] mr-2 hover:cursor-pointer"
+                alt={"dasdas"}
+              />
             </div>
             <div className={`flex ${`text-slate-50 font-semibold`}`}>
               {navigation.map((e, i) => {

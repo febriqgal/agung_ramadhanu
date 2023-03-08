@@ -66,7 +66,7 @@ export default function Login() {
             <div className="text-center">
               <Link
                 href={"/login/lupapassword"}
-                className="font-medium text-[#2D3082]"
+                className="font-medium text-sky-700"
               >
                 Lupa password?
               </Link>
@@ -75,13 +75,13 @@ export default function Login() {
             <div>
               <Link
                 href={"/login/signup"}
-                className="text-[#2D3082] mb-2 w-full flex justify-center py-2 px-4 rounded-lg shadow-xl text-sm font-medium focus:outline-none focus:ring-1 focus:ring-offset-2 ring-[#2D3082] outline outline-1 outline-[#2D3082]"
+                className="text-sky-700 mb-2 w-full flex justify-center py-2 px-4 rounded-lg shadow-xl text-sm font-medium focus:outline-none focus:ring-1 focus:ring-offset-2 ring-sky-700 outline outline-1 outline-sky-800"
               >
                 Buat Akun
               </Link>
               <button
                 type="submit"
-                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-xl text-sm font-medium text-white bg-[#2D3082] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#2D3082]"
+                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-xl text-sm font-medium text-white bg-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-800"
               >
                 Masuk
               </button>
