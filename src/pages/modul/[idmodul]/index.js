@@ -1,12 +1,14 @@
 /* eslint-disable @next/next/no-img-element */
 import Layout from "@/components/layout";
 import { useUser } from "@/context/user";
+import protectLogin from "@/protect/protect-login";
 import { db } from "@/server/firebase";
 import { uuidv4 } from "@firebase/util";
 import { Loading, Modal, Table, Tooltip } from "@nextui-org/react";
 import dayjs from "dayjs";
 import "dayjs/locale/id";
 import relativeTime from "dayjs/plugin/relativeTime";
+
 import { getAuth } from "firebase/auth";
 import {
   collection,
@@ -30,8 +32,7 @@ import hapus from "../../../../public/hapus.svg";
 import Modul from "../../../../public/modul.svg";
 import penulis from "../../../../public/penulis.svg";
 import styles from "../../../styles/Home.module.css";
-
-export default function Index() {
+const DetailModul = () => {
   const random = uuidv4();
   const user = getAuth();
   const snapshotTugas = useRef(null);
@@ -97,11 +98,11 @@ export default function Index() {
                 <div className="flex bg-white flex-col rounded-lg shadow-2xl p-4 lg:flex-row gap-1 lg:gap-0 lg:justify-evenly">
                   <div className="flex  items-center gap-2">
                     <Image src={penulis} width={20} alt={"#"} />
-                    <h2 className="text-xs">{post.penulis}</h2>
+                    <h2 className="text-xs">{post.dibuat}</h2>
                   </div>
                   <div className="flex items-center gap-2">
                     <Image src={dilihat} width={20} alt={"#"} />
-                    <h2 className="text-xs">{`Dilihat ${post.dilihat} kali`}</h2>
+                    <h2 className="text-xs">{`${post.dilihat} kali`}</h2>
                   </div>
                   <div className="flex items-center gap-2">
                     <Image src={dibuat} width={20} alt={"#"} />
@@ -112,16 +113,9 @@ export default function Index() {
                     </Tooltip>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Image src={Docc} width={20} alt={"#"} />
-                    <Tooltip content={post.tanggal_berita}>
-                      <Link
-                        target={"_blank"}
-                        href={"https://drive.google.com/"}
-                        className="uppercase text-xs"
-                      >
-                        Download
-                      </Link>
-                    </Tooltip>
+                    <Link target={"_blank"} href={`${post.link}`}>
+                      <Image src={Docc} width={20} alt={"#"} />
+                    </Link>
                   </div>
                   {email === "febriqgal@gmail.com" ? (
                     <>
@@ -298,4 +292,5 @@ export default function Index() {
       </Layout>
     );
   }
-}
+};
+export default protectLogin(DetailModul);

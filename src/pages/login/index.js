@@ -14,7 +14,7 @@ export default function Login() {
     const push = async () => {
       await signInWithEmailAndPassword(auth, data.email, data.password);
       setTimeout(() => {
-        route.replace("/dashboard-admin");
+        route.replace("/");
       }, 2000);
     };
     toast.promise(push(), {
@@ -65,7 +65,7 @@ export default function Login() {
             </div>
             <div className="text-center">
               <Link
-                href={"/login/lupapassword"}
+                href={"/login/lupa-password"}
                 className="font-medium text-sky-700"
               >
                 Lupa password?

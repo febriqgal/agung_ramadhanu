@@ -68,10 +68,10 @@ export default function News() {
                   </div>
                   <div className="p-7">
                     <h1 className={`${styles.truncate2} font-bold text-center`}>
-                      {`${dataa.judul}`.slice(0, 100)}
+                      {`${dataa.modul}`.slice(0, 100)}
                     </h1>
                     <h1 className={`${styles.truncate3} text-justify`}>
-                      {`${dataa.isi}`.slice(0, 100)}
+                      {`${dataa.deskripsi}`.slice(0, 100)}
                     </h1>
                   </div>
                 </div>

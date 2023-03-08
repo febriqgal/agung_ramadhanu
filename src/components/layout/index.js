@@ -11,14 +11,17 @@ import Project from "../../../public/project.svg";
 import Team from "../../../public/team.svg";
 import styles from "../../styles/Home.module.css";
 import FooterC from "./footerC";
+import app from "@/server/firebase";
+import { getAuth } from "firebase/auth";
+import Dropdownprofile from "./profile";
 export default function Layout({ children, title }) {
   const route = useRouter();
-
+  const auth = getAuth(app);
+  const user = auth.currentUser;
   const navigation = [
     { title: "Home", href: "/", icon: Home },
     { title: "Informasi", href: "/informasi", icon: Contact },
     { title: "Modul", href: "/modul", icon: Project },
-    { title: "Login", href: "/login", icon: Contact },
   ];
   const [clientWindowHeight, setClientWindowHeight] = useState("");
   const [backgroundTransparacy, setBackgroundTransparacy] = useState(0);
@@ -83,7 +86,9 @@ export default function Layout({ children, title }) {
                 alt={"dasdas"}
               />
             </div>
-            <div className={`flex ${`text-slate-50 font-semibold`}`}>
+            <div
+              className={`flex justify-self-center place-items-center text-slate-50 font-semibold`}
+            >
               {navigation.map((e, i) => {
                 return (
                   <Link
@@ -99,6 +104,11 @@ export default function Layout({ children, title }) {
                   </Link>
                 );
               })}
+              {user != null ? (
+                <Dropdownprofile />
+              ) : (
+                <Link href={"/login"}>Login</Link>
+              )}
             </div>
           </div>
         </nav>

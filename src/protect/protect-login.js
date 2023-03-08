@@ -9,7 +9,7 @@ const protectLogin = (Pages) => {
     const { uid } = user;
 
     if (!uid) {
-      route.replace("/");
+      route.replace("/login");
       return <></>;
     }
 

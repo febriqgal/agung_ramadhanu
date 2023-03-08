@@ -58,7 +58,7 @@ export default function Index() {
   } else {
     const post = snapshot.current;
     return (
-      <Layout title={post.judul}>
+      <Layout title={`${post.judul} - `}>
         <Toaster />
         <Head></Head>
         <div className={styles.main}>

@@ -10,17 +10,17 @@ import CardProfile from "./card-profile";
 import Styles from "../../styles/Home.module.css";
 const LayoutAdmin = ({ children, titlee }) => {
   const navigation = [
-    { name: "Beranda", icon: home, href: "/dashboard-admin" },
+    { name: "Beranda", icon: home, href: "/admin" },
     {
       name: "Tambah Informasi",
       icon: home,
-      href: "/dashboard-admin/tambah-informasi",
+      href: "/admin/tambah-informasi",
     },
-    // { name: "Tambah Download", icon: tambahberita, href: "/dashboard-admin/download" },
+    // { name: "Tambah Download", icon: tambahberita, href: "/admin/download" },
     {
       name: "Tambah Modul",
       icon: home,
-      href: "/dashboard-admin/tambah-modul",
+      href: "/admin/tambah-modul",
     },
   ];
   const route = useRouter();

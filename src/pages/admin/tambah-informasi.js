@@ -18,7 +18,7 @@ export default function TambahInformasi() {
   const user = auth.currentUser;
   const [imageUpload, setImageUpload] = useState();
   //   const storage = getStorage(app);
-  //   const storageRef = ref(storage, `image/berita/${uid}`);
+  //   const storageRef = ref(storage, `image/informasi/${uid}`);
 
   const addDatafromDBFirestore = async (data) => {
     const push = async () => {
@@ -34,7 +34,7 @@ export default function TambahInformasi() {
     };
     toast.promise(push(), {
       loading: "Mohon tunggu...",
-      success: <b>Berhasil menambahkan berita</b>,
+      success: <b>Berhasil menambahkan informasi</b>,
       error: <b>Terjadi kesalahan, silahkan coba lagi.</b>,
     });
   };
@@ -47,7 +47,7 @@ export default function TambahInformasi() {
       >
         <textarea
           className="mb-2 py-1 px-3 w-full rounded-lg mr-2 shadow-lg"
-          placeholder="Masukan judul berita"
+          placeholder="Masukan judul informasi"
           control={control}
           {...register("judul", { required: true })}
         />
@@ -55,7 +55,7 @@ export default function TambahInformasi() {
         <textarea
           rows={"6"}
           className="mb-2 py-1 px-3 w-full rounded-lg mr-2 shadow-lg"
-          placeholder="Masukan isi berita"
+          placeholder="Masukan isi informasi"
           control={control}
           {...register("isi", { required: true })}
         />

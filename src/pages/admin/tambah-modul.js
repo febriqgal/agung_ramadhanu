@@ -18,16 +18,18 @@ export default function TambahInformasi() {
   const user = auth.currentUser;
   const [imageUpload, setImageUpload] = useState();
   //   const storage = getStorage(app);
-  //   const storageRef = ref(storage, `image/berita/${uid}`);
+  //   const storageRef = ref(storage, `image/modul/${uid}`);
 
   const addDatafromDBFirestore = async (data) => {
     const push = async () => {
       //   if (imageUpload == null) return;
       //   await uploadBytes(storageRef, imageUpload);
       await addDoc(collection(db, "modul"), {
-        judul: data.judul,
-        isi: data.isi,
+        dibuat: user.displayName,
+        modul: data.modul,
+        deskripsi: data.deskripsi,
         dilihat: 0,
+        link: data.link,
         tanggal: dayjs().format(),
         // gambar: storageRef.name,
       });
@@ -35,7 +37,7 @@ export default function TambahInformasi() {
     };
     toast.promise(push(), {
       loading: "Mohon tunggu...",
-      success: <b>Berhasil menambahkan berita</b>,
+      success: <b>Berhasil menambahkan modul</b>,
       error: <b>Terjadi kesalahan, silahkan coba lagi.</b>,
     });
   };
@@ -48,17 +50,23 @@ export default function TambahInformasi() {
       >
         <textarea
           className="mb-2 py-1 px-3 w-full rounded-lg mr-2 shadow-lg"
-          placeholder="Masukan judul berita"
+          placeholder="Masukan modul modul"
           control={control}
-          {...register("judul", { required: true })}
+          {...register("modul", { required: true })}
         />
 
         <textarea
           rows={"6"}
           className="mb-2 py-1 px-3 w-full rounded-lg mr-2 shadow-lg"
-          placeholder="Masukan isi berita"
+          placeholder="Masukan deskripsi modul"
           control={control}
-          {...register("isi", { required: true })}
+          {...register("deskripsi", { required: true })}
+        />
+        <textarea
+          className="mb-2 py-1 px-3 w-full rounded-lg mr-2 shadow-lg"
+          placeholder="Masukan link google drive"
+          control={control}
+          {...register("link", { required: true })}
         />
         <button
           className="hover:bg-white text-white hover:text-sky-700 w-full duration-1000 shadow-lg mb-2 py-1 px-3 rounded-lg hover:cursor-pointer"
