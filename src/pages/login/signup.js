@@ -80,7 +80,7 @@ export default function Signup() {
                 <input
                   className="mb-2 py-2 px-4 rounded-lg w-full shadow-xl text-slate-900"
                   type={"text"}
-                  maxLength={16}
+                  maxLength={100}
                   placeholder="Nama"
                   {...register("nama", { required: true })}
                 />

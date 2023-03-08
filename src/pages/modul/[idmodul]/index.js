@@ -6,24 +6,39 @@ import { Loading, Modal, Tooltip } from "@nextui-org/react";
 import dayjs from "dayjs";
 import "dayjs/locale/id";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { deleteDoc, doc, getDoc } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  getDoc,
+  orderBy,
+} from "firebase/firestore";
+import { Table, Header } from "@nextui-org/react";
+import app from "@/server/firebase";
+import { uuidv4 } from "@firebase/util";
+import { getAuth } from "firebase/auth";
+import { getDocs, query } from "firebase/firestore";
 import { deleteObject, getStorage, ref } from "firebase/storage";
-import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
-import { Toaster } from "react-hot-toast";
-import dibuat from "../../../public/dibuat.svg";
-import dilihat from "../../../public/dilihat.svg";
-import edit from "../../../public/edit.svg";
-import hapus from "../../../public/hapus.svg";
-import penulis from "../../../public/penulis.svg";
-import styles from "../../styles/Home.module.css";
+import { toast, Toaster } from "react-hot-toast";
+import dibuat from "../../../../public/dibuat.svg";
+import dilihat from "../../../../public/dilihat.svg";
+import edit from "../../../../public/edit.svg";
+import hapus from "../../../../public/hapus.svg";
+import penulis from "../../../../public/penulis.svg";
+import styles from "../../../styles/Home.module.css";
 export default function Index() {
+  const random = uuidv4();
+  const user = getAuth();
+  const snapshotTugas = useRef(null);
+
   const [isLoading, setIsloading] = useState(true);
   const route = useRouter();
-  const { idd } = route.query;
+  const { idmodul } = route.query;
   const users = useUser();
   const { email } = users;
   const [visible, setVisible] = useState(false);
@@ -35,15 +50,28 @@ export default function Index() {
   dayjs.locale("id");
   dayjs.extend(relativeTime);
   const dataBerita = async () => {
-    const docRef = doc(db, "modul", `${idd}`);
+    const docRef = doc(db, "modul", `${idmodul}`);
     const docSnap = await getDoc(docRef);
     snapshot.current = docSnap.data();
     setTimeout(() => {
       setIsloading(false);
     }, 1000);
   };
+  //------------------------------------------------------
+  const getTugas = async () => {
+    const querySnapshot = query(
+      collection(db, "tugas"),
+      orderBy("urutan", "desc")
+    );
+    const gettt = await getDocs(querySnapshot);
+    snapshotTugas.current = gettt.docs;
+    setTimeout(() => {
+      setIsloading(false);
+    }, 1000);
+  };
   useEffect(() => {
     dataBerita();
+    getTugas();
   });
   if (isLoading) {
     return (
@@ -55,10 +83,12 @@ export default function Index() {
     );
   } else {
     const post = snapshot.current;
+    const postTugas = snapshotTugas.current;
+    const dataTugas = Object.values(postTugas);
     return (
       <Layout title={post.judul}>
         <Toaster />
-        <Head></Head>
+
         <div className={styles.main}>
           <div className={`border-2 overflow-hidden rounded-b-xl  rounded-lg`}>
             <div className="relative max-w-7xl mx-auto py-5 px-5 sm:px-6 lg:px-8">
@@ -92,7 +122,7 @@ export default function Index() {
                           <Image width={20} src={hapus} alt={"#"} />
                         </Tooltip>
                       </button>
-                      <Link href={`${id}/edit/${post.isi}`}>
+                      <Link href={`${idmodul}/edit/${post.isi}`}>
                         <Tooltip content={"Edit"}>
                           <Image width={20} src={edit} alt={"#"} />
                         </Tooltip>
@@ -193,6 +223,73 @@ export default function Index() {
                 </div>
               </div>
             </div>
+          </div>
+          <button
+            onClick={() => {
+              const push = async () => {
+                await addDoc(collection(db, "tugas"), {
+                  nama: user.currentUser.displayName,
+                  tanggal: dayjs().format("ddd, MMM D, YYYY HH:mm"),
+                  urutan: dayjs().format(),
+                  link: "https://www.youtube.com/",
+                });
+              };
+              toast.promise(push(), {
+                loading: "Mohon tunggu...",
+                success: <b>Berhasil menambahkan berita</b>,
+                error: <b>Terjadi kesalahan, silahkan coba lagi.</b>,
+              });
+            }}
+            className="bg-sky-700 text-white rounded-lg px-4 py-2 mt-4 shadow-xl"
+          >
+            Kirim Tugas
+          </button>
+          <div className="w-full text-white px-5">
+            <Table
+              className="w-full"
+              bordered
+              shadow={false}
+              color="secondary"
+              aria-label="Example pagination  table"
+              css={{
+                width: "fit-content",
+                height: "fit-content",
+                minWidth: "100%",
+              }}
+              selectionMode="none"
+            >
+              <Table.Header>
+                <Table.Column>No.</Table.Column>
+                <Table.Column>Tugas</Table.Column>
+                <Table.Column>Nama</Table.Column>
+                <Table.Column>Tanggal</Table.Column>
+                <Table.Column>Link</Table.Column>
+              </Table.Header>
+              <Table.Body>
+                {dataTugas.map((e, i) => {
+                  const dataa = e.data();
+                  return (
+                    <Table.Row css={{ color: "White" }} key={i}>
+                      <Table.Cell>{i + 1}</Table.Cell>
+                      <Table.Cell>{dataa.nama}</Table.Cell>
+                      <Table.Cell>{dataa.nama}</Table.Cell>
+                      <Table.Cell>{dataa.tanggal}</Table.Cell>
+                      <Table.Cell>
+                        <Link href={dataa.link}>Link</Link>
+                      </Table.Cell>
+                    </Table.Row>
+                  );
+                })}
+              </Table.Body>
+              <Table.Pagination
+                shadow
+                noMargin
+                color={"gradient"}
+                align="center"
+                rowsPerPage={6}
+                onPageChange={(page) => console.log({ page })}
+              />
+            </Table>
           </div>
         </div>
       </Layout>

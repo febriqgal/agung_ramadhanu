@@ -42,6 +42,7 @@ export default function News() {
   } else {
     const post = snapshot.current;
     const data = Object.values(post);
+
     return (
       <Layout title={"Modul -"}>
         <div className={styles.main}>
@@ -51,7 +52,7 @@ export default function News() {
               return (
                 <div
                   onClick={() => {
-                    route.push(`/informasi/${e.id}`);
+                    route.push(`/modul/${e.id}`);
                   }}
                   className="flex items-center flex-col hover:scale-110 duration-500 transition-all hover:cursor-pointer w-full rounded-xl shadow-lg border max-w-sm text-white hover:bg-white hover:text-black"
                   key={i}
