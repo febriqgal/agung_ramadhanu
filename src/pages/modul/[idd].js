@@ -14,12 +14,12 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 import { Toaster } from "react-hot-toast";
-import dibuat from "../../../../public/dibuat.svg";
-import dilihat from "../../../../public/dilihat.svg";
-import edit from "../../../../public/edit.svg";
-import hapus from "../../../../public/hapus.svg";
-import penulis from "../../../../public/penulis.svg";
-import styles from "../../../styles/Home.module.css";
+import dibuat from "../../../public/dibuat.svg";
+import dilihat from "../../../public/dilihat.svg";
+import edit from "../../../public/edit.svg";
+import hapus from "../../../public/hapus.svg";
+import penulis from "../../../public/penulis.svg";
+import styles from "../../styles/Home.module.css";
 export default function Index() {
   const [isLoading, setIsloading] = useState(true);
   const route = useRouter();
