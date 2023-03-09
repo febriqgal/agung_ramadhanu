@@ -9,11 +9,11 @@ import {
   default as admin,
   default as ubahnama,
 } from "../../../public/admin.svg";
-export default function Dropdownprofile() {
+export default function DropdownprofileMobile() {
   const auth = getAuth();
   const route = useRouter();
   return (
-    <Menu as="div" className="flex  place-items-center flex-col text-left">
+    <Menu as="div" className="flex z-50  place-items-center flex-col text-left">
       <Menu.Button
         title="Akun"
         className={"h-10 w-10 rounded-full overflow-clip"}
@@ -50,7 +50,7 @@ export default function Dropdownprofile() {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className="lg:absolute top-16 right-10 text-black  mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-xl ring-1 ring-black ring-opacity-5 focus:outline-none">
+        <Menu.Items className="top-32  relative text-black  mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-xl ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div className="px-1 py-1 ">
             <div className="text-center mt-2">
               <h1 className="uppercase font-bold">

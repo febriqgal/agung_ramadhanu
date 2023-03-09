@@ -17,7 +17,7 @@ export default function CardProfile() {
           />
         </div>
         <div className="ml-3">
-          <h1 className="text-sm font-bold">{"Febriqgal"}</h1>
+          <h1 className="text-sm font-bold">{user.displayName}</h1>
           <h1 className="text-xs  italic">{user.email ?? "-"}</h1>
           <ButtonKeluar />
         </div>

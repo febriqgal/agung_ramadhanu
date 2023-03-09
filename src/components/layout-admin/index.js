@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Toaster } from "react-hot-toast";
 import Link from "next/link";
 import home from "../../../public/home.svg";
+import edit from "../../../public/edit.svg";
 import { useRouter } from "next/router";
 import CardProfile from "./card-profile";
 import Styles from "../../styles/Home.module.css";
@@ -13,13 +14,13 @@ const LayoutAdmin = ({ children, titlee }) => {
     { name: "Beranda", icon: home, href: "/admin" },
     {
       name: "Tambah Informasi",
-      icon: home,
+      icon: edit,
       href: "/admin/tambah-informasi",
     },
     // { name: "Tambah Download", icon: tambahberita, href: "/admin/download" },
     {
       name: "Tambah Modul",
-      icon: home,
+      icon: edit,
       href: "/admin/tambah-modul",
     },
   ];
@@ -60,8 +61,8 @@ const LayoutAdmin = ({ children, titlee }) => {
                   <Link
                     className={
                       route.pathname === e.href
-                        ? `bg-sky-700 text-slate-50 py-1 flex items-center px-2 rounded-lg`
-                        : `hover:bg-sky-700 hover:text-white py-1 flex items-center hover:px-2 rounded-lg`
+                        ? `bg-sky-700 text-slate-50 py-1 flex items-center px-2 rounded-lg shadow-2xl`
+                        : `hover:bg-sky-700 hover:text-white py-1 flex items-center hover:px-2 rounded-lg duration-1000 transition-all shadow-2xl`
                     }
                     href={e.href}
                   >

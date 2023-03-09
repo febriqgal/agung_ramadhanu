@@ -6,17 +6,20 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import { addDoc, collection } from "firebase/firestore";
 import { useForm } from "react-hook-form";
 import { toast, Toaster } from "react-hot-toast";
+import { getAuth } from "firebase/auth";
 export default function TambahInformasi() {
   dayjs.locale("id");
   dayjs.extend(relativeTime);
   const { register, handleSubmit, control, reset } = useForm();
-
+  const user = getAuth().currentUser;
   const addDatafromDBFirestore = async (data) => {
     const push = async () => {
       await addDoc(collection(db, "informasi"), {
         judul: data.judul,
         isi: data.isi,
         dilihat: 0,
+        tanggal: dayjs().format(),
+        penulis: user.displayName,
       });
       reset();
     };
@@ -30,7 +33,7 @@ export default function TambahInformasi() {
     <LayoutAdmin titlee="Tambah Informasi -">
       <Toaster />
       <form
-        className="flex flex-col w-full md:w-[500px] m-auto pt-10 px-10"
+        className="flex flex-col w-full md:w-[500px] m-auto p-10 text-black"
         onSubmit={handleSubmit(addDatafromDBFirestore)}
       >
         <textarea
@@ -48,7 +51,7 @@ export default function TambahInformasi() {
           {...register("isi", { required: true })}
         />
         <button
-          className="hover:bg-white w-full duration-1000 shadow-lg hover:text-sky-700 mb-2 py-1 px-3 rounded-lg hover:cursor-pointer"
+          className="hover:bg-white w-full duration-1000 shadow-lg hover:text-sky-700 mb-2 py-1 px-3 rounded-lg hover:cursor-pointer text-white"
           type="submit"
         >
           Kirim

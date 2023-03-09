@@ -8,7 +8,7 @@ import Image from "next/image";
 const protectAdmin = (Pages) => {
   return (props) => {
     const { uid, email } = useUser();
-    if (!uid || email != "febriqgal@gmail.com") {
+    if (!uid || email != "agungramadhanu@gmail.com") {
       return (
         <section>
           <Head>

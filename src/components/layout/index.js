@@ -14,6 +14,7 @@ import FooterC from "./footerC";
 import app from "@/server/firebase";
 import { getAuth } from "firebase/auth";
 import Dropdownprofile from "./profile";
+import DropdownprofileMobile from "./profileMobile";
 export default function Layout({ children, title }) {
   const route = useRouter();
   const auth = getAuth(app);
@@ -61,14 +62,14 @@ export default function Layout({ children, title }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/logo1.png" />
       </Head>
-      <div className={`bg-gradient-to-br from-sky-800 via-cyan-900 to-sky-700`}>
+      <div>
         <motion.div
           className="progress-bar fixed rounded-xl bg-slate-50 top-0 left-0 right-0 h-1 z-[999] origin-top"
           style={{ scaleX }}
         />
 
         <nav
-          className="backdrop-blur-sm w-screen hidden fixed lg:block z-50"
+          className="backdrop-blur-sm w-screen hidden fixed lg:block z-50 border-b-2"
           style={{
             padding: `${padding}px 0px`,
             boxShadow: `rgb(0 0 0 / ${boxShadow}) 0px 0px 20px 6px`,
@@ -119,7 +120,9 @@ export default function Layout({ children, title }) {
             boxShadow: `rgb(0 0 0 / ${boxShadow}) 0px 0px 20px 6px`,
           }}
         >
-          <div className="h-5  w-5 absolute left-5"> </div>
+          <div className="absolute left-4">
+            <DropdownprofileMobile />
+          </div>
           <div className={`w-screen mx-auto bg-center flex justify-center`}>
             <Image src={Logo} className="w-[150px] mr-2" alt={"dasdas"} />
           </div>
@@ -131,7 +134,7 @@ export default function Layout({ children, title }) {
             boxShadow: `rgb(0 0 0 /  0.05) 0px 0px 20px 6px`,
           }}
         >
-          <div className={`w-screen mx-auto flex`}>
+          <div className={`w-screen mx-auto flex text-white`}>
             {navigation.map((e, i) => (
               <div key={i} className="w-full items-center">
                 <a href={e.href} className="flex flex-col place-items-center">

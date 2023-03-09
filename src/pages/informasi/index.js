@@ -1,17 +1,34 @@
 /* eslint-disable @next/next/no-img-element */
 import Layout from "@/components/layout";
+import LoadingC from "@/components/loading";
 import { db } from "@/server/firebase";
-import { Loading } from "@nextui-org/react";
-import { collection, doc, getDocs, query, updateDoc } from "firebase/firestore";
+import dayjs from "dayjs";
+import "dayjs/locale/id";
+import relativeTime from "dayjs/plugin/relativeTime";
+import {
+  collection,
+  doc,
+  getDocs,
+  orderBy,
+  query,
+  updateDoc,
+} from "firebase/firestore";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 import styles from "../../styles/Home.module.css";
+import dibuat from "../../../public/dibuat.svg";
+import Image from "next/image";
+dayjs.locale("id");
+dayjs.extend(relativeTime);
 export default function News() {
   const route = useRouter();
   const snapshot = useRef(null);
   const [isLoading, setIsloading] = useState(true);
   const getDBFromFirestore = async () => {
-    const querySnapshot = query(collection(db, "informasi"));
+    const querySnapshot = query(
+      collection(db, "informasi"),
+      orderBy("tanggal", "desc")
+    );
     const gettt = await getDocs(querySnapshot);
     snapshot.current = gettt.docs;
     setTimeout(() => {
@@ -24,21 +41,13 @@ export default function News() {
   }, []);
 
   if (isLoading) {
-    return (
-      <>
-        <Layout>
-          <div className={styles.main}>
-            <Loading color={"white"} />
-          </div>
-        </Layout>
-      </>
-    );
+    return <LoadingC />;
   } else {
     const post = snapshot.current;
     const data = Object.values(post);
     return (
       <Layout title={"Informasi -"}>
-        <div className={styles.main}>
+        <div className="min-h-screen justify-center items-center flex flex-col py-24 px-10">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
             {data.map((e, i) => {
               const dataa = e.data();
@@ -63,7 +72,12 @@ export default function News() {
                     <h1 className={`${styles.truncate2} font-bold`}>
                       {`${dataa.judul}`.slice(0, 100)}
                     </h1>
-                    <h1 className={`${styles.truncate3}`}>
+
+                    <h1 className="text-xs">
+                      {`${dayjs(dataa.tanggal).fromNow()}`}
+                    </h1>
+
+                    <h1 className={`${styles.truncate3} font-light mt-2`}>
                       {`${dataa.isi}`.slice(0, 100)}
                     </h1>
                   </div>

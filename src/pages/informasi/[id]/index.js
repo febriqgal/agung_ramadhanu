@@ -1,14 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
 import Layout from "@/components/layout";
+import LoadingC from "@/components/loading";
 import { useUser } from "@/context/user";
 import { db } from "@/server/firebase";
-import { Loading, Modal, Tooltip } from "@nextui-org/react";
+import { Modal, Tooltip } from "@nextui-org/react";
 import dayjs from "dayjs";
 import "dayjs/locale/id";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { deleteDoc, doc, getDoc } from "firebase/firestore";
-import { deleteObject, getStorage, ref } from "firebase/storage";
-import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -16,7 +15,7 @@ import { useEffect, useRef, useState } from "react";
 import { Toaster } from "react-hot-toast";
 import dibuat from "../../../../public/dibuat.svg";
 import dilihat from "../../../../public/dilihat.svg";
-import edit from "../../../../public/edit.svg";
+import editinformasi from "../../../../public/editinformasi.svg";
 import hapus from "../../../../public/hapus.svg";
 import penulis from "../../../../public/penulis.svg";
 import styles from "../../../styles/Home.module.css";
@@ -46,20 +45,14 @@ export default function Index() {
     dataBerita();
   });
   if (isLoading) {
-    return (
-      <Layout>
-        <div className={styles.main}>
-          <Loading color={"white"} />
-        </div>
-      </Layout>
-    );
+    return <LoadingC />;
   } else {
     const post = snapshot.current;
     return (
       <Layout title={`${post.judul} - `}>
         <Toaster />
-        <Head></Head>
-        <div className={styles.main}>
+
+        <div className={`py-24 px-5`}>
           <div className={`border-2 overflow-hidden rounded-b-xl  rounded-lg`}>
             <div className="relative max-w-7xl mx-auto py-5 px-5 sm:px-6 lg:px-8">
               <div className="hidden lg:block absolute top-0 bottom-0 left-3/4 w-screen" />
@@ -71,17 +64,15 @@ export default function Index() {
                   </div>
                   <div className="flex items-center gap-2">
                     <Image src={dilihat} width={20} alt={"#"} />
-                    <h2 className="text-xs">{`Dilihat ${post.dilihat} kali`}</h2>
+                    <h2 className="text-xs">{`${post.dilihat} kali`}</h2>
                   </div>
                   <div className="flex items-center gap-2">
                     <Image src={dibuat} width={20} alt={"#"} />
-                    <Tooltip content={post.tanggal_berita}>
-                      <h3 className="uppercase text-xs">
-                        {`${dayjs(post.tanggal).fromNow()}`}
-                      </h3>
-                    </Tooltip>
+                    <h3 className="uppercase text-xs">
+                      {`${dayjs(post.tanggal).fromNow()}`}
+                    </h3>
                   </div>
-                  {email === "febriqgal@gmail.com" ? (
+                  {email === "agungramadhanu@gmail.com" ? (
                     <>
                       <button
                         onClick={() => {
@@ -94,7 +85,7 @@ export default function Index() {
                       </button>
                       <Link href={`${id}/edit/${post.isi}`}>
                         <Tooltip content={"Edit"}>
-                          <Image width={20} src={edit} alt={"#"} />
+                          <Image width={20} src={editinformasi} alt={"#"} />
                         </Tooltip>
                       </Link>
                     </>
@@ -115,13 +106,7 @@ export default function Index() {
                     <button
                       className="bg-red-500 py-1 px-4 rounded-lg text-white"
                       onClick={async () => {
-                        const docRef = doc(db, "berita", `${id}`);
-                        const storage = getStorage(app);
-                        const desertRef = ref(
-                          storage,
-                          `image/berita/${post.gambar}`
-                        );
-                        await deleteObject(desertRef);
+                        const docRef = doc(db, "informasi", `${id}`);
                         await deleteDoc(docRef);
                         route.push("/");
                         setTimeout(() => {

@@ -1,9 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
 import Layout from "@/components/layout";
+import LoadingC from "@/components/loading";
 import { useUser } from "@/context/user";
 import protectLogin from "@/protect/protect-login";
 import { db } from "@/server/firebase";
-import { Loading, Modal, Table, Tooltip } from "@nextui-org/react";
+import { Modal, Table, Tooltip } from "@nextui-org/react";
 import dayjs from "dayjs";
 import "dayjs/locale/id";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -15,7 +16,7 @@ import {
   getDoc,
   getDocs,
   orderBy,
-  query
+  query,
 } from "firebase/firestore";
 import Image from "next/image";
 import Link from "next/link";
@@ -25,7 +26,7 @@ import { Toaster } from "react-hot-toast";
 import dibuat from "../../../../public/dibuat.svg";
 import dilihat from "../../../../public/dilihat.svg";
 import Docc from "../../../../public/doc.svg";
-import edit from "../../../../public/edit.svg";
+import edit from "../../../../public/editinformasi.svg";
 import hapus from "../../../../public/hapus.svg";
 import Modul from "../../../../public/modul.svg";
 import penulis from "../../../../public/penulis.svg";
@@ -74,22 +75,16 @@ const DetailModul = () => {
   });
 
   if (isLoading) {
-    return (
-      <Layout>
-        <div className={styles.main}>
-          <Loading color={"white"} />
-        </div>
-      </Layout>
-    );
+    return <LoadingC />;
   } else {
     const post = snapshot.current;
     const postTugas = snapshotTugas.current;
     const dataTugas = Object.values(postTugas);
     return (
-      <Layout title={post.judul}>
+      <Layout title={post.modul}>
         <Toaster />
 
-        <div className={styles.main}>
+        <div className={`py-24 px-5`}>
           <div className={`border-2 overflow-hidden rounded-b-xl  rounded-lg`}>
             <div className="relative max-w-7xl mx-auto py-5 px-5 sm:px-6 lg:px-8">
               <div className="hidden lg:block absolute top-0 bottom-0 left-3/4 w-screen" />
@@ -116,7 +111,7 @@ const DetailModul = () => {
                       <Image src={Docc} width={20} alt={"#"} />
                     </Link>
                   </div>
-                  {email === "febriqgal@gmail.com" ? (
+                  {email === "agungramadhanu@gmail.com" ? (
                     <>
                       <button
                         onClick={() => {
@@ -127,7 +122,7 @@ const DetailModul = () => {
                           <Image width={20} src={hapus} alt={"#"} />
                         </Tooltip>
                       </button>
-                      <Link href={`${idmodul}/edit/${post.isi}`}>
+                      <Link href={`${idmodul}/edit/${post.modul}`}>
                         <Tooltip content={"Edit"}>
                           <Image width={20} src={edit} alt={"#"} />
                         </Tooltip>
@@ -150,12 +145,10 @@ const DetailModul = () => {
                     <button
                       className="bg-red-500 py-1 px-4 rounded-lg text-white"
                       onClick={async () => {
-                        const docRef = doc(db, "informasi", `${id}`);
+                        const docRef = doc(db, "modul", `${idmodul}`);
+                        await deleteDoc(doc(db, "cities", "DC"));
                         await deleteDoc(docRef);
                         route.push("/");
-                        setTimeout(() => {
-                          window.location.reload();
-                        }, 3000);
                       }}
                     >
                       Hapus
@@ -214,23 +207,26 @@ const DetailModul = () => {
                 </div>
                 <div className="mt-8 lg:mt-0">
                   <div className="text-base max-w-prose mx-auto lg:max-w-none">
-                    <p className="text-xl font-bold text-white">{post.judul}</p>
+                    <p className="text-xl font-bold text-white">{post.modul}</p>
                   </div>
                   <div className="mt-5 prose prose-indigo text-white mx-auto lg:max-w-none lg:row-start-1 lg:col-start-1">
-                    <h1 className="text-justify">{post.isi}</h1>
+                    <h1 className="text-justify">{post.deskripsi}</h1>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <button
-            onClick={() => {
-              route.push(`/modul/${idmodul}/kirim-tugas`);
-            }}
-            className="bg-sky-700 text-white rounded-lg px-4 py-2 m-4 shadow-2xl"
-          >
-            Kirim Tugas
-          </button>
+          {/* {user.currentUser.email === febriqgalp} */}
+          <div className=" items-center flex justify-center">
+            <button
+              onClick={() => {
+                route.push(`/modul/${idmodul}/kirim-tugas`);
+              }}
+              className="bg-sky-700 text-white rounded-lg px-4 py-2 m-4 shadow-2xl"
+            >
+              Kirim Tugas
+            </button>
+          </div>
           <div className="w-full text-white ">
             <Table
               bordered
@@ -248,7 +244,6 @@ const DetailModul = () => {
                 <Table.Column>Tugas</Table.Column>
                 <Table.Column>Nama</Table.Column>
                 <Table.Column>Tanggal</Table.Column>
-
                 <Table.Column>Link</Table.Column>
               </Table.Header>
               <Table.Body>
@@ -265,7 +260,8 @@ const DetailModul = () => {
                       <Table.Cell>{dataa.nama}</Table.Cell>
                       <Table.Cell>{dataa.tanggal}</Table.Cell>
                       <Table.Cell css={{ width: "fit-content" }}>
-                        {user.currentUser.email === "febriqgal@gmail.com" ? (
+                        {user.currentUser.email ===
+                        "agungramadhanu@gmail.com" ? (
                           <Link target={"_blank"} href={dataa.link}>
                             Link
                           </Link>

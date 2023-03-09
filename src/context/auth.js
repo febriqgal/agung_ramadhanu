@@ -5,6 +5,7 @@ import { Authentication } from "@/server/firebase";
 import styles from "../styles/Home.module.css";
 
 import { InitialUserState, useUser } from "./user";
+import LoadingC from "@/components/loading";
 
 const AuthStateChangeProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -34,11 +35,7 @@ const AuthStateChangeProvider = ({ children }) => {
   }, []);
 
   if (isLoading) {
-    return (
-      <div className={styles.main}>
-        <Loading color={"currentColor"} />
-      </div>
-    );
+    return <LoadingC />;
   }
 
   return children;

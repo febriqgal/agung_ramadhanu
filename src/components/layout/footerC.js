@@ -10,7 +10,7 @@ import yt from "../../../public/yt.svg";
 import Styles from "../../styles/Home.module.css";
 export default function FooterC() {
   return (
-    <div className={`bg-white bg-opacity-5 shadow-2xl rounded-t-2xl`}>
+    <div className={`bg-white bg-opacity-5 shadow-2xl rounded-t-2xl border-t-2`}>
       <div className="flex flex-col justify-center items-center p-5">
         <div className="h-24 w-24 rounded-full overflow-clip hover:scale-110 duration-500 transition-all">
           <Image className="scale-110 translate-x-1" src={Profile} alt={"#"} />
