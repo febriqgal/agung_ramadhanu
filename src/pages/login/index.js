@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { toast, Toaster } from "react-hot-toast";
-import Styles from "../../styles/Home.module.css";
 export default function Login() {
   const route = useRouter();
   const { register, handleSubmit, reset } = useForm();

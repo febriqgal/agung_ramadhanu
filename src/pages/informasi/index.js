@@ -1,12 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
 import Layout from "@/components/layout";
-import FooterC from "@/components/layout/footerC";
-import { Loading } from "@nextui-org/react";
-import { query, collection, getDocs, doc, updateDoc } from "firebase/firestore";
-import styles from "../../styles/Home.module.css";
 import { db } from "@/server/firebase";
-import { useRef, useState, useEffect } from "react";
+import { Loading } from "@nextui-org/react";
+import { collection, doc, getDocs, query, updateDoc } from "firebase/firestore";
 import { useRouter } from "next/router";
+import { useEffect, useRef, useState } from "react";
+import styles from "../../styles/Home.module.css";
 export default function News() {
   const route = useRouter();
   const snapshot = useRef(null);

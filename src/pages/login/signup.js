@@ -1,29 +1,24 @@
 /* eslint-disable @next/next/no-img-element */
+import app, { db } from "@/server/firebase";
 import dayjs from "dayjs";
 import "dayjs/locale/id";
 import {
   createUserWithEmailAndPassword,
   getAuth,
   signOut,
-  updateProfile,
+  updateProfile
 } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
-import Head from "next/head";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast, Toaster } from "react-hot-toast";
-import { db } from "@/server/firebase";
 import styles from "../../styles/Home.module.css";
-import app from "@/server/firebase";
 export default function Signup() {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const titlePage = "Daftar";
-  const [nohp, setnohp] = useState();
   const route = useRouter();
   const auth = getAuth(app);
   auth.currentUser;
@@ -76,7 +71,7 @@ export default function Signup() {
               <input
                 className="mb-2 py-2 px-4 rounded-lg w-full shadow-xl text-slate-900"
                 type={"text"}
-                maxLength={100}
+                maxLength={20}
                 placeholder="Nama"
                 {...register("nama", { required: true })}
               />

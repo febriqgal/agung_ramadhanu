@@ -4,26 +4,17 @@ import dayjs from "dayjs";
 import "dayjs/locale/id";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { getAuth } from "firebase/auth";
-import { addDoc, collection, Timestamp } from "firebase/firestore";
-import { useState } from "react";
+import { addDoc, collection } from "firebase/firestore";
 import { useForm } from "react-hook-form";
 import { toast, Toaster } from "react-hot-toast";
-import { v4 as uuidv4 } from "uuid";
 export default function TambahInformasi() {
   dayjs.locale("id");
   dayjs.extend(relativeTime);
   const { register, handleSubmit, control, reset } = useForm();
-  const uid = uuidv4();
   const auth = getAuth();
   const user = auth.currentUser;
-  const [imageUpload, setImageUpload] = useState();
-  //   const storage = getStorage(app);
-  //   const storageRef = ref(storage, `image/modul/${uid}`);
-
   const addDatafromDBFirestore = async (data) => {
     const push = async () => {
-      //   if (imageUpload == null) return;
-      //   await uploadBytes(storageRef, imageUpload);
       await addDoc(collection(db, "modul"), {
         dibuat: user.displayName,
         modul: data.modul,
@@ -31,7 +22,6 @@ export default function TambahInformasi() {
         dilihat: 0,
         link: data.link,
         tanggal: dayjs().format(),
-        // gambar: storageRef.name,
       });
       reset();
     };

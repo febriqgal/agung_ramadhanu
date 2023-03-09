@@ -1,15 +1,12 @@
 import protectLogin from "@/protect/protect-login";
-import React from "react";
-import { getAuth, updatePassword, signOut } from "firebase/auth";
-import Head from "next/head";
+import app from "@/server/firebase";
+import { getAuth, updatePassword } from "firebase/auth";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import app from "@/server/firebase";
-import styles from "../../styles/Home.module.css";
 import { toast, Toaster } from "react-hot-toast";
+import styles from "../../styles/Home.module.css";
 
 import { useRouter } from "next/router";
-import Layout from "@/components/layout";
 const EditPassword = () => {
   const route = useRouter();
   const [isDisable, setDisable] = useState(false);

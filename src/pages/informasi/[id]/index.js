@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import Layout from "@/components/layout";
-import React from "react";
+import { useUser } from "@/context/user";
+import { db } from "@/server/firebase";
 import { Loading, Modal, Tooltip } from "@nextui-org/react";
 import dayjs from "dayjs";
 import "dayjs/locale/id";
@@ -13,15 +14,12 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 import { Toaster } from "react-hot-toast";
-import penulis from "../../../../public/penulis.svg";
-import dilihat from "../../../../public/dilihat.svg";
 import dibuat from "../../../../public/dibuat.svg";
-import hapus from "../../../../public/hapus.svg";
+import dilihat from "../../../../public/dilihat.svg";
 import edit from "../../../../public/edit.svg";
-import { useUser } from "@/context/user";
+import hapus from "../../../../public/hapus.svg";
+import penulis from "../../../../public/penulis.svg";
 import styles from "../../../styles/Home.module.css";
-import { db } from "@/server/firebase";
-import FooterC from "@/components/layout/footerC";
 export default function Index() {
   const [isLoading, setIsloading] = useState(true);
   const route = useRouter();

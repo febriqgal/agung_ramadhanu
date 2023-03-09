@@ -3,12 +3,10 @@ import Layout from "@/components/layout";
 import { useUser } from "@/context/user";
 import protectLogin from "@/protect/protect-login";
 import { db } from "@/server/firebase";
-import { uuidv4 } from "@firebase/util";
 import { Loading, Modal, Table, Tooltip } from "@nextui-org/react";
 import dayjs from "dayjs";
 import "dayjs/locale/id";
 import relativeTime from "dayjs/plugin/relativeTime";
-
 import { getAuth } from "firebase/auth";
 import {
   collection,
@@ -17,7 +15,7 @@ import {
   getDoc,
   getDocs,
   orderBy,
-  query,
+  query
 } from "firebase/firestore";
 import Image from "next/image";
 import Link from "next/link";
@@ -33,10 +31,8 @@ import Modul from "../../../../public/modul.svg";
 import penulis from "../../../../public/penulis.svg";
 import styles from "../../../styles/Home.module.css";
 const DetailModul = () => {
-  const random = uuidv4();
   const user = getAuth();
   const snapshotTugas = useRef(null);
-
   const [isLoading, setIsloading] = useState(true);
   const route = useRouter();
   const { idmodul } = route.query;
@@ -50,6 +46,7 @@ const DetailModul = () => {
   const snapshot = useRef(null);
   dayjs.locale("id");
   dayjs.extend(relativeTime);
+
   const dataBerita = async () => {
     const docRef = doc(db, "modul", `${idmodul}`);
     const docSnap = await getDoc(docRef);
@@ -58,7 +55,7 @@ const DetailModul = () => {
       setIsloading(false);
     }, 1000);
   };
-  //------------------------------------------------------
+
   const getTugas = async () => {
     const querySnapshot = query(
       collection(db, idmodul),
@@ -70,10 +67,12 @@ const DetailModul = () => {
       setIsloading(false);
     }, 1000);
   };
+
   useEffect(() => {
     dataBerita();
     getTugas();
   });
+
   if (isLoading) {
     return (
       <Layout>

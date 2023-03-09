@@ -1,7 +1,4 @@
 /* eslint-disable @next/next/no-img-element */
-import React from "react";
-import Person from "../../../public/profile.jpeg";
-
 import { getAuth } from "firebase/auth";
 import ButtonKeluar from "./button-keluar";
 export default function CardProfile() {

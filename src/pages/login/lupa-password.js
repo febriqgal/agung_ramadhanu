@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast, Toaster } from "react-hot-toast";
 import styles from "../../styles/Home.module.css";
-
 import { useRouter } from "next/router";
 
 export default function EditPassword() {
@@ -27,6 +26,7 @@ export default function EditPassword() {
       error: <b>Terjadi kesalahan</b>,
     });
   };
+
   return (
     <>
       <div

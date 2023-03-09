@@ -5,9 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { Fragment } from "react";
-import { useUser } from "../../context/user";
-import admin from "../../../public/admin.svg";
-import ubahnama from "../../../public/admin.svg";
+import { default as admin, default as ubahnama } from "../../../public/admin.svg";
 export default function Dropdownprofile() {
   const auth = getAuth();
   const route = useRouter();
